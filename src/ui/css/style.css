@@ -1,0 +1,56 @@
+#root {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #header {
+      background-color: greenyellow;
+      height: 75px;
+	  text-align: center;
+	  
+  }
+  /* Float four columns side by side */
+.column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 -5px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    margin: 1rem;
+    border: 1px solid gray;
+    border-radius: 2cm;
+    padding: 16px;
+	text-align: center;
+	
+  }
+  
+  /* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+    .imgClass {
+        max-width: 500px;
+        height: 150px;
+        width: 150px;
+    }
