@@ -35,7 +35,7 @@ function loadLandingPage(){
 var request = new XMLHttpRequest()
 
 // Open a new connection, using the GET request on the URL endpoint
-request.open('GET', "http://localhost:3000/getAllApps", true)
+request.open('GET', "https://server-gplay-app.herokuapp.com/getAllApps", true)
 
 request.onload = function() {
   
@@ -91,7 +91,7 @@ request.send()
 }
 
 function loadDetailPage(appId){
-  window.location.replace(`./app-detail.html?pkg=${appId}`)
+  window.location.assign(`./app-detail?pkg=${appId}`)
 }
 
 function getDetails(element){
@@ -101,3 +101,25 @@ function getDetails(element){
 }
 
 loadLandingPage();
+
+function updateData(){
+
+  //1. Request to update the data
+  request.open('GET', "https://server-gplay-app.herokuapp.com/updateData", true)
+  request.onload = function(){
+
+  // Begin accessing JSON data here
+  var data = JSON.parse(this.response)
+
+  if (request.status >= 200 && request.status < 400){
+    alert("Data has been updated. Updating the application data below.");
+  }else{
+    alert("Could not update data. Plesae try again later.");
+  }
+
+  //2. On 200 Success, load the landing page..
+  loadLandingPage();
+  }
+  request.send();
+
+}

@@ -6,7 +6,7 @@ const appId = urlParams.get("pkg");
 var request = new XMLHttpRequest()
 
 
-request.open('GET', `http://localhost:3000/getAppById?appId=${appId}`, true)
+request.open('GET', `https://server-gplay-app.herokuapp.com/getAppById?appId=${appId}`, true)
 
 request.onload = function(){
     console.log(this.response);
@@ -18,7 +18,6 @@ request.onload = function(){
     console.log(app, container)
     app.appendChild(container)
 
-    console.log("DATA.PAYLOAD --- > ", Object.keys(data));
     const card = document.createElement('div')
     card.setAttribute('class', 'card-detail')
 
@@ -26,15 +25,15 @@ request.onload = function(){
     img.setAttribute("class", "icon-detail");
     img.src = data.payload.icon
 
-        // Create an h1 and set the text content to the film's title
-        const h1 = document.createElement('h2')
-        h1.setAttribute("class", "title-detail");
-        h1.textContent = data.payload.title
+    // Create an h1 and set the text content to the film's title
+    const h1 = document.createElement('h2')
+    h1.setAttribute("class", "title-detail");
+    h1.textContent = data.payload.title
 
-        // Create a p and set the text content to the app's summary
-        const p = document.createElement('p')
-        p.setAttribute("class", "summary-deatil");
-        p.textContent = `${data.payload.summary}`
+    // Create a p and set the text content to the app's summary
+    const p = document.createElement('p')
+    p.setAttribute("class", "summary-deatil");
+    p.textContent = `${data.payload.summary}`
 
     // Create a p and set the text content to the app's description
     const p_desc = document.createElement('p')
@@ -45,12 +44,12 @@ request.onload = function(){
     
     p_desc.textContent = `${data.payload.description}`
 
-        // Create a p and set the text content to the app's summary
-        const p_ss = document.createElement('p')
-        p_ss.setAttribute("class", "summary-deatil");
-        p_ss.textContent = `Here are a few screenshots from the app..`
+    // Create a p and set the text content to the app's summary
+    const p_ss = document.createElement('p')
+    p_ss.setAttribute("class", "summary-deatil");
+    p_ss.textContent = `Here are a few screenshots from the app..`
 
-        const screenshotDiv = document.createElement('div')
+    const screenshotDiv = document.createElement('div')
 
    
     p_ss.setAttribute("class", "heading");
@@ -78,7 +77,7 @@ request.onload = function(){
     let reviewArray = data.payload.comments;
     counter = 0;
     reviewArray.forEach(element => {
-        if(counter<5){
+        if(counter<4){
         const comment = document.createElement('p');
         comment.setAttribute("class", "comment");
         comment.textContent = `  -- ${element}"`;
@@ -87,15 +86,17 @@ request.onload = function(){
         }
     });
 
-
+    const downloadDiv = document.createElement('div');
      // Create a p and set the text content to the app's description
      const downloadHead = document.createElement('img')
+     
      const url = document.createElement('a')
      url.setAttribute("href", data.payload.url)
-     url.appendChild(downloadHead);
+     url.setAttribute("class", "downloadImg")
      downloadHead.setAttribute("class", "downloadImg")
      downloadHead.src = ('./img/getitongoogle.png')
-
+     url.appendChild(downloadHead);
+     downloadDiv.appendChild(url);
 
     // Append the cards to the container element
     container.appendChild(card)
@@ -107,7 +108,7 @@ request.onload = function(){
     card.appendChild(p_desc)
     card.appendChild(screenshotDiv);
     card.appendChild(reviewDiv);
-    card.appendChild(url);
+    card.appendChild(downloadDiv);
 
 };
 
