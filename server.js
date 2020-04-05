@@ -18,8 +18,6 @@ app.use(function(req, res, next) {
     next();
   });
 
-
-
 // Route for /getAllApps
 app.get(contants.PATH_GET_ALL_APPS, handler.getAllAppHandler);
 

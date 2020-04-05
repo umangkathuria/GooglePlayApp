@@ -5,7 +5,12 @@ const gplayService = require('./gplay-service');
 const dbClient = require('../db/db-client');
 const logger = require('umang_logger_module');
 
-
+/**
+ * Use this method to handle the GET requests at /getAllApps. 
+ * 
+ * @param {Object} request Request object
+ * @param {Object} response Reesponse object of server.
+ */
 function getAllAppHandler(request, response){
     dbClient.getDbObject()
     .then((db)=>{
@@ -19,8 +24,10 @@ function getAllAppHandler(request, response){
           error: err
         })
         }
-        // send HTML file populated with quotes here
         logger.info("All apps fetched successfully.. sending repsonse!")
+        if(results.length == 0){
+          this.updateData(request, response);
+        }
         response.send({
           status: "OK",
           code: 200,
@@ -37,6 +44,12 @@ function getAllAppHandler(request, response){
     
 }
 
+/**
+ * Use this method to handle the GET requests at /getAppById. 
+ * 
+ * @param {Object} request Request object
+ * @param {Object} response Reesponse object of server.
+ */
 function getAppById(request, response){
   logger.info("Received GET request at /getAppById");
     gplayService.getAppById(request.query.appId)
@@ -60,6 +73,12 @@ function getAppById(request, response){
     })
 }
 
+/**
+ * Use this method to handle the GET requests at /updateData. 
+ * 
+ * @param {Object} request Request object
+ * @param {Object} response Reesponse object of server.
+ */
 function updateData(request, response){
   logger.info("Received GET request at /updateData");
 
@@ -103,7 +122,14 @@ module.exports.getAppById = getAppById;
 module.exports.updateData = updateData
 
 
-
+/**
+ * Use this method to add new items to DB or to update the 
+ * existing ones with new values based on the the appId. 
+ * 
+ * @param {Object} db Contains the DB object.
+ * @param {Array} results Contains the array of objects that needs to be 
+ * updated/added in the DB. 
+ */
 function updateAndAdd(db, results){
   return new Promise((resolve, reject)=>{
 

@@ -29,8 +29,6 @@ app.appendChild(container);
 
 function loadLandingPage(){
 
-
-
 // Create a request variable and assign a new XMLHttpRequest object to it.
 var request = new XMLHttpRequest()
 
@@ -44,42 +42,54 @@ request.onload = function() {
 
   if (request.status >= 200 && request.status < 400) {
       console.log("ALL Apps- ", data.payload);
-      data.payload.forEach(app => {
+      let apps = data.payload;
+      if(apps.length == 0){
+        const h = document.createElement('h3');
+        h.textContent="Uh-oh! :("
+        const h2 = document.createElement('h3');
+          h2.textContent = "No Applications are currently present in database. Please click the Update button to fetch new data."
+         // Append the cards to the container element
+         container.appendChild(h)
+         container.appendChild(h2)
+      }else{
+        data.payload.forEach(app => {
 
-    //   Create a div with a card class
-    const card = document.createElement('div')
-        card.setAttribute('class', 'card')
-        card.setAttribute('onClick', 'onClick=getDetails(this)');
-        card.setAttribute('id', app.appId);
-
-        // Create IMG tag for icon of the 
-        const img = document.createElement('img') 
-        img.setAttribute("class", "icon");
-        img.src = app.icon
-
-        // Create an h1 and set the text content to the film's title
-        const h1 = document.createElement('h2')
-        h1.setAttribute("class", "title");
-        h1.textContent = app.title
-
-        // Create a p and set the text content to the film's summary
-        const p = document.createElement('p')
-        p.setAttribute("class", "summary");
-
-        // app.summary = app.summary.substring(0, 300) // Limit to 300 chars
-        p.textContent = `${app.summary}` // End with an ellipses
-
-
-        
-        // Append the cards to the container element
-        container.appendChild(card)
-
-        // Each card will contain an h1 and a p
-        card.appendChild(img)
-        card.appendChild(h1)
-        card.appendChild(p)
-        
-        })
+          //   Create a div with a card class
+          const card = document.createElement('div')
+              card.setAttribute('class', 'card')
+              card.setAttribute('onClick', 'onClick=getDetails(this)');
+              card.setAttribute('id', app.appId);
+      
+              // Create IMG tag for icon of the 
+              const img = document.createElement('img') 
+              img.setAttribute("class", "icon");
+              img.src = app.icon
+      
+              // Create an h1 and set the text content to the film's title
+              const h1 = document.createElement('h2')
+              h1.setAttribute("class", "title");
+              h1.textContent = app.title
+      
+              // Create a p and set the text content to the film's summary
+              const p = document.createElement('p')
+              p.setAttribute("class", "summary");
+      
+              // app.summary = app.summary.substring(0, 300) // Limit to 300 chars
+              p.textContent = `${app.summary}` // End with an ellipses
+      
+      
+              
+              // Append the cards to the container element
+              container.appendChild(card)
+      
+              // Each card will contain an h1 and a p
+              card.appendChild(img)
+              card.appendChild(h1)
+              card.appendChild(p)
+              
+              })
+      }
+      
   } else {
     console.log('error')
   }
@@ -103,8 +113,8 @@ function getDetails(element){
 loadLandingPage();
 
 function updateData(){
-
-  //1. Request to update the data
+  // Create a request variable and assign a new XMLHttpRequest object to it.
+  var request = new XMLHttpRequest()
   request.open('GET', "https://server-gplay-app.herokuapp.com/updateData", true)
   request.onload = function(){
 
@@ -116,9 +126,9 @@ function updateData(){
   }else{
     alert("Could not update data. Plesae try again later.");
   }
-
+  window.location.assign(`./landing-page.html`)
   //2. On 200 Success, load the landing page..
-  loadLandingPage();
+  // loadLandingPage();
   }
   request.send();
 
