@@ -1,82 +1,48 @@
+/** */
+const gplayService = require('./gplay-service');
+
 function getAllAppHandler(request, response){
     console.log("Hello! You will soon ge all the apps at this endpoint");
-    response.send({
+    gplayService.getAllTopSellingFreeApps()
+    .then((result)=>{
+      console.log("All apps fetched successfully.. sending repsonse!")
+      response.send({
         status: "OK",
         code: 200,
         message: "Success",
-        payload: [
-            {
-                title: 'MyJio: For Everything Jio',
-                appId: 'com.jio.myjio',
-                url: 'https://play.google.com/store/apps/details?id=com.jio.myjio',
-                icon: 'https://lh3.googleusercontent.com/W6-GRr_DiVmMphLSzsH2Z2fGMdlM8ZLjNhKS93ALvLO3Dkfl6RejtMqlARBoA2dCw0Y',      
-                developer: 'Reliance Corporate IT Park Limited',
-                developerId: '8426036374624640337',
-                priceText: 'FREE',
-                currency: undefined,
-                price: 0,
-                free: true,
-                summary: 'Recharges, payments, music, movies, back up, games &amp; more.',
-                scoreText: '4.4',
-                score: 4.3934107
-              },
-              {
-                title: 'MyJio: For Everything Jio',
-                appId: 'com.jio.myjio',
-                url: 'https://play.google.com/store/apps/details?id=com.jio.myjio',
-                icon: 'https://lh3.googleusercontent.com/W6-GRr_DiVmMphLSzsH2Z2fGMdlM8ZLjNhKS93ALvLO3Dkfl6RejtMqlARBoA2dCw0Y',      
-                developer: 'Reliance Corporate IT Park Limited',
-                developerId: '8426036374624640337',
-                priceText: 'FREE',
-                currency: undefined,
-                price: 0,
-                free: true,
-                summary: 'Recharges, payments, music, movies, back up, games &amp; more.',
-                scoreText: '4.4',
-                score: 4.3934107
-              },
-              {
-                title: 'MyJio: For Everything Jio',
-                appId: 'com.jio.myjio',
-                url: 'https://play.google.com/store/apps/details?id=com.jio.myjio',
-                icon: 'https://lh3.googleusercontent.com/W6-GRr_DiVmMphLSzsH2Z2fGMdlM8ZLjNhKS93ALvLO3Dkfl6RejtMqlARBoA2dCw0Y',      
-                developer: 'Reliance Corporate IT Park Limited',
-                developerId: '8426036374624640337',
-                priceText: 'FREE',
-                currency: undefined,
-                price: 0,
-                free: true,
-                summary: 'Recharges, payments, music, movies, back up, games &amp; more.',
-                scoreText: '4.4',
-                score: 4.3934107
-              }
-        ]
+        payload: result
+      })
+    })
+    .catch((err)=>{
+      console.log("Error Occured--> ", err);
+      response.send({
+        status: 500,
+        message: "Internal Server error.",
+        errDescription: "Could not fetch data from the API. Check the error object for more details.",
+        error: err
+      })
     })
 }
 
 function getAppById(request, response){
-    console.log("Hello! You will soon get apps by ID at this endpoint");
-    response.send({
+    console.log("Received GET request at /getAppById");
+    gplayService.getAppById(request.query.appId)
+    .then((result) => {
+      response.send({
         status: "OK",
         code: 200,
         message: "Success",
-        payload: {
-                title: 'MyJio: For Everything Jio',
-                appId: 'com.jio.myjio',
-                url: 'https://play.google.com/store/apps/details?id=com.jio.myjio',
-                icon: 'https://lh3.googleusercontent.com/W6-GRr_DiVmMphLSzsH2Z2fGMdlM8ZLjNhKS93ALvLO3Dkfl6RejtMqlARBoA2dCw0Y',      
-                developer: 'Reliance Corporate IT Park Limited',
-                developerId: '8426036374624640337',
-                priceText: 'FREE',
-                currency: undefined,
-                price: 0,
-                free: true,
-                summary: 'Recharges, payments, music, movies, back up, games &amp; more.',
-                scoreText: '4.4',
-                score: 4.3934107
-            }
+        payload: result
+      })
     })
-
+    .catch((err)=>{
+      response.send({
+        status: 500,
+        message: "Internal Server error.",
+        errDescription: "Could not fetch data from the API. Check the error object for more details.",
+        error: err
+      })
+    })
 }
 
 module.exports.getAllAppHandler = getAllAppHandler;

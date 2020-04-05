@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "google-play-scraper": "^7.1.2",
+    "live-server": "^1.2.1",
     "umang_logger_module": "^1.1.4"
   }
 }
