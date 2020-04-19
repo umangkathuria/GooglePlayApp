@@ -10,10 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1",
     "google-play-scraper": "^7.1.2",
     "live-server": "^1.2.1",
     "mongodb": "^3.5.5",
+    "mongoose": "^5.9.9",
     "umang_logger_module": "^1.1.4"
   }
 }

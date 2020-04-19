@@ -7,7 +7,7 @@ const MongoClient = require('mongodb').MongoClient
 
 let db;
 
-function getDbObject(){
+function getDbObject() {
     return new Promise((resolve, reject) => {
         MongoClient.connect(process.env.DB_URL, (err, client) => {
             if (err) {
@@ -15,11 +15,11 @@ function getDbObject(){
                 reject(err)
             }
             db = client.db('apps') // whatever your database name is
-            db.collection('android-apps').createIndex( { "appId": 1 }, { unique: true } )
+            db.collection('new-android-apps').createIndex({ "appId": 1 }, { unique: true })
             resolve(db)
-          })
+        })
     })
-    
+
 }
 
 module.exports.getDbObject = getDbObject;
