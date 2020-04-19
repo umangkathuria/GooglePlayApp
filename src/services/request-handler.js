@@ -34,7 +34,7 @@ function getAllAppHandler(request, response) {
                     updateData(request, response);
                 }
                 response.send({
-                    status: "OK",
+                    status: 200,
                     code: 200,
                     message: "Success",
                     payload: results
@@ -81,8 +81,7 @@ function getAppById(request, response) {
                     } else {
                         logger.info("Application list fetched successfully. Preparing response.")
                         response.send({
-                            status: "OK",
-                            code: 200,
+                            status: 200,
                             message: "Success",
                             payload: result[0]
                         })
@@ -116,14 +115,15 @@ function updateData(request, response) {
                 .then((_) => {
                     logger.info("DataBase Updated Successfully.");
                     response.send({
-                        status: "OK",
+                        status: 200,
                         code: 200
                     })
                 })
                 .catch((err) => {
                     logger.error("Error Occured--> ", err);
                     response.send({
-                        status: "Could not load new data.",
+                        status: 503,
+                        message: "Couldn't load data",
                         code: 503,
                         err
                     })
@@ -132,7 +132,8 @@ function updateData(request, response) {
         }).catch((err) => {
             logger.info("Error Occured--> ", err);
             response.send({
-                status: "Could not connect with DB",
+                message: "Could not connect with DB",
+                status: 503,
                 code: 503,
                 err
             })
@@ -194,8 +195,8 @@ function crawlAndPush(request, response) {
         scrapper.crawl()
             .then((result) => {
                 response.send({
-                    status: "OK",
                     code: 200,
+                    status: 200,
                     message: "Success",
                     payload: result
                 })
