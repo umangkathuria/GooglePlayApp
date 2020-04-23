@@ -1,0 +1,222 @@
+#header {
+  background-color: #4CAF50;
+  height: 75px;
+  text-align: center;
+  border-radius: 10px;
+  top: 0px;
+  width: 99%;
+  position: fixed;
+  padding-bottom: 20px;
+
+}
+
+#root {
+    max-width: 100%;
+    margin-top: 25px;
+  }
+/*Facebook Loader*/
+.lds-facebook {
+  display: inline-block;
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  margin-left: 45%;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background:rgb(92, 214, 96);
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+
+/*Riple Loader*/
+/* .lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 10%;
+  height: auto;
+  margin-left: 40%;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 8px solid rgb(92, 214, 96);
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0%;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+} */
+
+
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 100px;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+}
+  /* Float four columns side by side */
+.column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 -5px;}
+
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  
+  .card {
+    margin: 1rem;
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 16px;
+    text-align: center;
+    width: 275px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #f1f1f1;
+   
+  }
+  /* Card style for a single app  */
+  .card-detail {
+    margin: 1rem;
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 16px;
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 90%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #f1f1f1;
+   
+  }
+  
+  
+  /* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+  .icon {
+      max-width: 500px;
+      height: 45%;
+      width: 50%;
+  }
+
+  .icon-detail {
+    max-width: 280px;
+    max-height: 280px;
+    height: min-content;
+    width: min-content;
+    border-radius: 70px;
+}
+
+  .summary {
+    width: inherit;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  .summary-detail {
+    width: inherit;
+    text-justify: auto;
+  }
+
+
+  .img-ss {
+    width: 17%;
+    height: inherit;
+    margin-right: 2%;
+    margin-top: 10px;
+  }
+
+  .comment {
+    text-size-adjust: 70%;
+    font-style: italic;
+    /* margin-top: 15px;
+    margin-bottom: 15px; */
+    float: left;
+    max-width: 90%;
+    /* width: 1%; */
+    padding: 0 10px;
+  }
+
+  .heading {
+    font-weight: 900;
+    margin-top: 20px;
+    font-size: larger;
+    padding: 0 10px;
+    
+  }
+
+  .downloadImg {
+    align-content: center;
+    width: 35%;
+    border-radius: 30px;
+  }
