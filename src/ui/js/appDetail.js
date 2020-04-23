@@ -2,11 +2,27 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const appId = urlParams.get("pkg");
 
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+
 // Create a request variable and assign a new XMLHttpRequest object to it.
 var request = new XMLHttpRequest()
-const localHost = "http://localhost:3000";
+const host = "https://server-gplay-app.herokuapp.com";
 
-request.open('GET', `${localHost}/getAppById?appId=${appId}`, true)
+request.open('GET', `${host}/getAppById?appId=${appId}`, true)
 
 request.onload = function() {
     console.log(this.response);
@@ -62,6 +78,8 @@ request.onload = function() {
                 const img = document.createElement('img');
                 img.setAttribute("class", "img-ss");
                 img.src = element;
+                img.setAttribute("onclick", "enlargeImage(this)");
+                // img.onclick = enlargeImage(img);
                 screenshotDiv.appendChild(img)
                 counter++;
             }
@@ -121,5 +139,11 @@ request.onload = function() {
 
 };
 
+function enlargeImage(img){
+
+    modal.style.display = "block";
+    modalImg.src = img.src;
+    
+}
 
 request.send()

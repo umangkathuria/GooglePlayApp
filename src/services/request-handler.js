@@ -1,12 +1,11 @@
 /**
  * Require
  */
-const gplayService = require('./gplay-service');
+
 const dbClient = require('../db/db-client');
 const logger = require('umang_logger_module');
 const scrapper = require('./scrapper');
 const constants = require('../constants.js');
-const ErrorHandler = require('../utils/errorHandler');
 
 /**
  * Use this method to handle the GET requests at /getAllApps. 
@@ -103,20 +102,22 @@ function getAppById(request, response) {
  */
 function updateData(request, response) {
     logger.info("Received GET request at /updateData");
-
+    let updatedData;
     dbClient.getDbObject()
         .then((db) => {
             // gplayService.getAllTopSellingFreeApps()
             scrapper.crawl()
                 .then((result) => {
                     logger.info("All apps fetched successfully.. updating database..");
+                    updatedData = result;
                     return updateAndAdd(db, result)
                 })
                 .then((_) => {
                     logger.info("DataBase Updated Successfully.");
                     response.send({
                         status: 200,
-                        code: 200
+                        code: 200,
+                        payload: updatedData,
                     })
                 })
                 .catch((err) => {
