@@ -184,18 +184,3 @@ function updateAndAdd(db, results) {
   });
 }
 
-// function crawlAndPush(request, response) {
-//   return new Promise((resolve, reject) => {
-//     scrapper.crawl()
-//       .then(result => {
-//         response.send({
-//           code: 200,
-//           status: 200,
-//           message: 'Success',
-//           payload: result,
-//         });
-//       });
-//   });
-// }
-
-// module.exports.crawlAndPush = crawlAndPush;

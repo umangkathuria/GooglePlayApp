@@ -1,12 +1,29 @@
+/* eslint-disable no-unused-vars */
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const appId = urlParams.get('pkg');
 
+// Get the modal
+const modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+const img = document.getElementById('myImg');
+const modalImg = document.getElementById('img01');
+
+
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName('close')[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = 'none';
+};
+
 // Create a request variable and assign a new XMLHttpRequest object to it.
 const request = new XMLHttpRequest();
-const localHost = 'http://localhost:3000';
+const host = 'https://server-gplay-app.herokuapp.com';
 
-request.open('GET', `${localHost}/getAppById?appId=${appId}`, true);
+request.open('GET', `${host}/getAppById?appId=${appId}`, true);
 
 request.onload = function() {
   console.log(this.response);
@@ -62,29 +79,12 @@ request.onload = function() {
         const img = document.createElement('img');
         img.setAttribute('class', 'img-ss');
         img.src = element;
+        img.setAttribute('onclick', 'enlargeImage(this)');
+        // img.onclick = enlargeImage(img);
         screenshotDiv.appendChild(img);
         counter++;
       }
     });
-
-    // Create a p and set the text content to the app's description
-    // const review = document.createElement('p')
-    // review.setAttribute("class", "heading");
-    // review.textContent = "Let's see what people are saying about this application...."
-    // const reviewDiv = document.createElement('div')
-    // reviewDiv.appendChild(review);
-
-    // let reviewArray = data.payload.comments;
-    // counter = 0;
-    // reviewArray.forEach(element => {
-    //     if (counter < 4) {
-    //         const comment = document.createElement('p');
-    //         comment.setAttribute("class", "comment");
-    //         comment.textContent = `  -- ${element}"`;
-    //         reviewDiv.appendChild(comment)
-    //         counter++;
-    //     }
-    // });
 
     const downloadDiv = document.createElement('div');
     // Create a p and set the text content to the app's description
@@ -120,5 +120,9 @@ request.onload = function() {
   }
 };
 
+function enlargeImage(img) {
+  modal.style.display = 'block';
+  modalImg.src = img.src;
+}
 
 request.send();
