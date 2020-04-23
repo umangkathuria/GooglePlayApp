@@ -12,10 +12,10 @@ const contants = require('./constants');
 const app = express();
 
 // Setting headers to ensure that CORS is validated.
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 
 // Route for /getAllApps
@@ -27,6 +27,6 @@ app.get(contants.PATH_GET_APP_BY_ID, handler.getAppById);
 // Route to update data
 app.get(contants.PATH_UPDATE_DATA, handler.updateData);
 
-app.listen(process.env.PORT, function() {
-    logger.info("Server intialised.")
+app.listen(process.env.PORT, () => {
+  logger.info('Server intialised.');
 });
